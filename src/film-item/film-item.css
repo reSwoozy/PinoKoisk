@@ -1,0 +1,25 @@
+.film-item {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 350px;
+  padding: 40px 25px;
+}
+
+.film-item__title {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.film-item__overview {
+  font-size: 16px;
+  font-weight: normal;
+  color: #dae1e1;
+}
+
+.film-item__genres {
+  font-size: 14px;
+  color: #8f9696;
+  padding-top: 4px;
+  padding-bottom: 8px;
+}
