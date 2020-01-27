@@ -1,13 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./film-list.css";
-import { FilmItemComponent } from "../film-item/film-item";
-import data from "../json/movies.json";
+import { FilmItem } from "../film-item/film-item";
 
-export const FilmListComponent = () => {
+export const FilmList = () => {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    fetch("https://devlab.website/v1/movies")
+      .then(response => response.json())
+      .then(setData);
+  }, []);
+
   return (
     <div className="film-list">
-      {data.map(film => (
-        <FilmItemComponent {...film} key={film.id} />
+      {data.map((film: any) => (
+        <FilmItem {...film} key={film.id} />
       ))}
     </div>
   );

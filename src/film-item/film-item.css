@@ -21,5 +21,14 @@
   font-size: 14px;
   color: #8f9696;
   padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.film-item__votes {
+  font-size: 14px;
   padding-bottom: 8px;
+}
+
+.star {
+  color: #fbc02d;
 }

@@ -1,8 +1,14 @@
 import React from "react";
-import { FilmListComponent } from "./film-list/film-list";
+import { FilmList } from "./film-list/film-list";
+import { Header } from "./header/header";
 
 const App: React.FC = () => {
-  return <FilmListComponent />;
+  return (
+    <>
+      <Header />
+      <FilmList />
+    </>
+  );
 };
 
 export default App;
