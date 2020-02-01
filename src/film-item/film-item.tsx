@@ -1,5 +1,8 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+
 import "./film-item.css";
+import { likeElementAction } from "../reduxSetup";
 
 export interface FilmsItemType {
   id: number;
@@ -19,6 +22,7 @@ export interface FilmsItemType {
 
 export const FilmItem = (props: FilmsItemType) => {
   const {
+    id,
     title,
     overview,
     genres,
@@ -28,10 +32,18 @@ export const FilmItem = (props: FilmsItemType) => {
     vote_count
   } = props;
 
+  const dispatch = useDispatch();
+
+  const api = "https://devlab.website";
+
+  const likeThis = () => {
+    dispatch(likeElementAction(id));
+  };
+
   return (
     <div className="film-item">
       <div className="film-item__poster">
-        <img src={poster_path} alt="" />
+        <img src={api + poster_path} alt="" width="100%" />
       </div>
       <div className="film-item__title">{title}</div>
       <div className="film-item__genres">Genres: {genres.join(", ")}</div>
@@ -47,6 +59,7 @@ export const FilmItem = (props: FilmsItemType) => {
         )
       </div>
       <div className="film-item__overview">{overview}</div>
+      <button onClick={likeThis}>Ставлю класс!</button>
     </div>
   );
 };
