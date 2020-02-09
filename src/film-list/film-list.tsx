@@ -1,9 +1,11 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import Grid from "@material-ui/core/Grid";
 
 import "./film-list.css";
-import { FilmItem, FilmsItemType } from "../film-item/film-item";
+import { FilmsItemType } from "../film-item/film-item";
 import { addElementAction } from "../reduxSetup";
+import { FilmItemPoster } from "../film-item/film-item-poster";
 
 export const FilmList = () => {
   const dispatch = useDispatch();
@@ -19,11 +21,27 @@ export const FilmList = () => {
       });
   }, []);
 
-  const content = useSelector<RootStore, FilmsItemType[]>(state => state.list);
+  const films = useSelector<RootStore, FilmsItemType[]>(state => state.list);
 
   return (
-    <div className="film-list">
-      {content && content.map(film => <FilmItem {...film} key={film.id} />)}
-    </div>
+    <Grid
+      container
+      direction="row"
+      justify="center"
+      alignItems="stretch"
+      spacing={0}
+    >
+      <Grid
+        container
+        item
+        justify="center"
+        alignItems="stretch"
+        xs={10}
+        md={8}
+        spacing={2}
+      >
+        {films && films.map(film => <FilmItemPoster {...film} key={film.id} />)}
+      </Grid>
+    </Grid>
   );
 };
