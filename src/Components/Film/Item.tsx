@@ -1,5 +1,9 @@
 import React from "react";
-import "./film-item.css";
+import { useDispatch } from "react-redux";
+
+import "./Item.css";
+import { likeElementAction } from "../../reduxSetup";
+import { MAINAPIURL } from "../../Constants/Constants";
 
 export interface FilmsItemType {
   id: number;
@@ -19,6 +23,7 @@ export interface FilmsItemType {
 
 export const FilmItem = (props: FilmsItemType) => {
   const {
+    id,
     title,
     overview,
     genres,
@@ -27,11 +32,15 @@ export const FilmItem = (props: FilmsItemType) => {
     vote_average,
     vote_count
   } = props;
+  const dispatch = useDispatch();
+  const likeThis = () => {
+    dispatch(likeElementAction(id));
+  };
 
   return (
     <div className="film-item">
       <div className="film-item__poster">
-        <img src={poster_path} alt="" />
+        <img src={MAINAPIURL + poster_path} alt="" width="100%" />
       </div>
       <div className="film-item__title">{title}</div>
       <div className="film-item__genres">Genres: {genres.join(", ")}</div>
@@ -47,6 +56,7 @@ export const FilmItem = (props: FilmsItemType) => {
         )
       </div>
       <div className="film-item__overview">{overview}</div>
+      <button onClick={likeThis}>Ставлю класс!</button>
     </div>
   );
 };
