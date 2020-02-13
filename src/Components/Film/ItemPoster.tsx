@@ -11,10 +11,11 @@ import {
 import { Favorite, FavoriteBorder } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/core/styles";
 
-import { likeElementAction, resetStoreAction } from "../reduxSetup";
-import { FilmsItemType } from "../film-item/film-item";
+import { likeElementAction, resetStoreAction } from "../../reduxSetup";
+import { FilmsItemType } from "./Item";
 import { red } from "@material-ui/core/colors";
-import { likedSelector } from "../selectors";
+import { likedSelector } from "../../selectors";
+import { MAINAPIURL } from "../../Constants/Constants";
 
 const useStyles = makeStyles(theme => ({
   card: { position: "relative" },
@@ -35,26 +36,25 @@ export const FilmItemPoster = (props: FilmsItemType) => {
   const { id, poster_path } = props;
   const classes = useStyles();
   const dispatch = useDispatch();
-  const api = "https://devlab.website";
   const likeThis = () => {
     dispatch(likeElementAction(id));
   };
-
-  const lk = useSelector(likedSelector);
-  console.log(lk);
 
   return (
     <Grid item xs={12} sm={5} lg={2}>
       <Card className={classes.card}>
         <CardActionArea>
-          <CardMedia component="img" height="250" image={api + poster_path} />
+          <CardMedia
+            component="img"
+            height="250"
+            image={MAINAPIURL + poster_path}
+          />
         </CardActionArea>
         <IconButton className={classes.likeButton} onClick={likeThis}>
-          {likedFilms.includes(id) ? (
-            <SvgIcon style={{ color: red[800] }} component={Favorite}></SvgIcon>
-          ) : (
-            <SvgIcon component={FavoriteBorder}></SvgIcon>
-          )}
+          <SvgIcon
+            style={new Set(likedFilms).has(id) ? { color: red[800] } : {}}
+            component={Favorite}
+          ></SvgIcon>
         </IconButton>
       </Card>
     </Grid>

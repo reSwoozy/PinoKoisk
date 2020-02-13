@@ -1,9 +1,19 @@
-import { addElement, likeElement, resetAll } from "./actionTypes";
-import { FilmsItemType } from "../film-item/film-item";
+import {
+  addElement,
+  addAllElements,
+  likeElement,
+  resetAll
+} from "./actionTypes";
+import { FilmsItemType } from "../Components/Film/Item";
 
 export const addElementAction = (newElement: FilmsItemType[]) => ({
   type: addElement,
   payload: newElement
+});
+
+export const addAllElementsAction = (allElement: []) => ({
+  type: addAllElements,
+  payload: allElement
 });
 
 export const likeElementAction = (likedElement: number) => ({

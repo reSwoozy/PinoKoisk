@@ -1,5 +1,10 @@
-import { addElement, likeElement, resetAll } from "./actionTypes";
-import { FilmsItemType } from "../film-item/film-item";
+import {
+  addElement,
+  addAllElements,
+  likeElement,
+  resetAll
+} from "./actionTypes";
+import { FilmsItemType } from "../Components/Film/Item";
 
 const initialState: RootStore = { list: [], liked: [] };
 
@@ -14,10 +19,19 @@ const actionHanlder = new Map<string, RootReducer>([
     }
   ],
   [
+    addAllElements,
+    (state, action: Action<any>) => {
+      return {
+        ...state,
+        list: action.payload
+      };
+    }
+  ],
+  [
     likeElement,
     (state, action: Action<number>) => {
       const { liked } = state;
-      if (liked.includes(action.payload)) {
+      if (new Set(liked).has(action.payload)) {
         return {
           ...state,
           liked: liked.filter(e => e !== action.payload)

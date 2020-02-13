@@ -4,6 +4,7 @@ type Action<T> = { type: string; payload: T };
 
 type ActionsT =
   | typeof addElement
+  | typeof addAllElements
   | typeof likeElement
   | typeof resetAll
   | "DEFAULT_PLUG";

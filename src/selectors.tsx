@@ -1,5 +1,5 @@
 import { createSelector } from "reselect";
-import { FilmsItemType } from "./film-item/film-item";
+import { FilmsItemType } from "./Components/Film/Item";
 
 const films = (state: { list: FilmsItemType[] }) => state.list;
 const likedFilms = (state: { liked: number[] }) => state.liked;
@@ -9,16 +9,6 @@ export const likedSelector = createSelector(
   likedFilms,
   (films, likedFilms) =>
     films.filter(film => {
-      return likedFilms.includes(film.id);
+      return new Set(likedFilms).has(film.id);
     })
 );
-
-// export const likedSelector = createSelector(
-//     films,
-//     likedFilms,
-//     (films, likedFilms) => {
-//       likedFilms.map(likedFilm => {
-//         films.filter(film => film.id === likedFilm);
-//       });
-//     }
-//   );

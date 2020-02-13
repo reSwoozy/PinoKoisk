@@ -2,23 +2,19 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Grid from "@material-ui/core/Grid";
 
-import "./film-list.css";
-import { FilmsItemType } from "../film-item/film-item";
-import { addElementAction } from "../reduxSetup";
-import { FilmItemPoster } from "../film-item/film-item-poster";
+import "./List.css";
+import { FilmsItemType } from "./Item";
+import { addElementAction, addAllElementsAction } from "../../reduxSetup";
+import { FilmItemPoster } from "./ItemPoster";
+import { APIURL } from "../../Constants/Constants";
 
 export const FilmList = () => {
   const dispatch = useDispatch();
-  const api = "https://devlab.website/v1";
 
   useEffect(() => {
-    fetch(api + "/movies")
+    fetch(APIURL + "/movies")
       .then(response => response.json())
-      .then(result => {
-        result.map((film: FilmsItemType[]) => {
-          dispatch(addElementAction(film));
-        });
-      });
+      .then(result => dispatch(addAllElementsAction(result)));
   }, []);
 
   const films = useSelector<RootStore, FilmsItemType[]>(state => state.list);
